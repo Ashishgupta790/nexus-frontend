@@ -1,0 +1,12 @@
+import { ArrowLeft, Check, Circle, GitBranch, Users } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { projects } from "../data/projects";
+import { Card } from "../components/ui/Card";
+import { Badge } from "../components/ui/Badge";
+
+export default function ProjectDetails() {
+  const { id } = useParams(); const p = projects.find(x=>x.id===id) ?? projects[0];
+  const tasks=["Implement search API","Optimize database queries","Add workflow automation","Write documentation"];
+  return <div className="mx-auto max-w-6xl"><Link to="/app/projects" className="mb-5 inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-white"><ArrowLeft size={15}/> Projects</Link><div className="flex flex-col justify-between gap-4 sm:flex-row"><div><Badge tone="blue">{p.status}</Badge><h1 className="mt-3 text-3xl font-semibold">{p.name}</h1><p className="mt-2 text-sm text-zinc-500">{p.description}</p></div><Link to={`/app/workflows/${p.id}`} className="inline-flex h-fit items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm">Open workflow <GitBranch size={15}/></Link></div><div className="mt-8 grid gap-3 sm:grid-cols-4"><Stat label="Progress" value={`${p.progress}%`}/><Stat label="Tasks" value={String(p.tasks)}/><Stat label="Workflows" value={String(p.workflows)}/><Stat label="Contributors" value={String(p.contributors)} icon={<Users size={14}/>}/></div><div className="mt-7 grid gap-6 lg:grid-cols-[1.3fr_.7fr]"><Card className="p-5"><h2 className="font-medium">Tasks</h2><div className="mt-4 divide-y divide-white/5">{tasks.map((t,i)=><div key={t} className="flex items-center gap-3 py-3 text-sm"><span className={i===0?"text-emerald-300":"text-zinc-600"}>{i===0?<Check size={16}/>:<Circle size={14}/>}</span><span className={i===0?"text-zinc-400 line-through":"text-zinc-300"}>{t}</span></div>)}</div></Card><Card className="p-5"><h2 className="font-medium">Project progress</h2><div className="mt-7 text-5xl font-semibold">{p.progress}<span className="text-xl text-zinc-600">%</span></div><div className="mt-5 h-2 rounded-full bg-white/5"><div className="h-2 rounded-full bg-white" style={{width:`${p.progress}%`}}/></div><p className="mt-3 text-xs text-zinc-600">Keep the workspace moving forward.</p></Card></div></div>;
+}
+function Stat({label,value,icon}:{label:string;value:string;icon?:any}){return <Card className="p-4"><div className="flex items-center gap-2 text-xs text-zinc-600">{icon}{label}</div><p className="mt-2 text-xl font-semibold">{value}</p></Card>}

@@ -1,0 +1,48 @@
+import type { Project } from "../types";
+
+export const projects: Project[] = [
+  {
+    id: "searchit",
+    name: "SearchIT",
+    description: "Developer-focused search infrastructure",
+    progress: 82,
+    tasks: 12,
+    workflows: 4,
+    contributors: 4,
+    status: "Active",
+    accent: "cyan",
+  },
+  {
+    id: "arose",
+    name: "Arose",
+    description: "Virtual try-on experience",
+    progress: 64,
+    tasks: 18,
+    workflows: 5,
+    contributors: 3,
+    status: "Active",
+    accent: "violet",
+  },
+  {
+    id: "eroute",
+    name: "E-Route",
+    description: "Intelligent route planning",
+    progress: 91,
+    tasks: 8,
+    workflows: 3,
+    contributors: 5,
+    status: "Active",
+    accent: "emerald",
+  },
+  {
+    id: "smartmail",
+    name: "Smart Mail",
+    description: "AI-assisted research and email automation",
+    progress: 47,
+    tasks: 22,
+    workflows: 7,
+    contributors: 2,
+    status: "Planning",
+    accent: "amber",
+  },
+];
